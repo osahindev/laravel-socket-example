@@ -6,8 +6,8 @@
                 <option value="">{{ $placeholderText }}</option>
             @endisset
 
-            @foreach($options as $optionValue => $optionText)
-                    <option value="{{ $optionValue }}">{{ $optionText }}</option>
+            @foreach($options as $option)
+                    <option value="{{ $option['value'] }}">{{ $option['text'] }}</option>
                 @endforeach
         </select>
         @if($errors->has($name))
