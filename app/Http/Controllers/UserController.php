@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserLoginRequest;
 use App\Http\Requests\UserRegisterRequest;
 use App\Models\Country;
 use App\Models\Language;
@@ -48,5 +49,27 @@ class UserController extends Controller
             'title' => 'Success !',
             'message' => "Registration success.",
         ]);
+    }
+
+    public function login() {
+        return view('pages.signin');
+    }
+
+    public function user_login(UserLoginRequest $request) {
+        if(auth()->attempt($request->only('email','password'))) {
+            return redirect()->route('home');
+        }
+
+        return redirect()->back()->with([
+            'type' => 'danger',
+            'title' => 'Error !',
+            'message' => "Login failed.",
+        ]);
+    }
+
+    public function logout() {
+        auth()->logout();
+
+        return redirect()->route('login');
     }
 }
