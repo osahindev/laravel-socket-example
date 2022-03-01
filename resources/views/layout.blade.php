@@ -28,7 +28,7 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="#">Sign In</a></li>
-                        <li><a class="dropdown-item" href="#">Register</a></li>
+                        <li><a class="dropdown-item" href="{{ route('register') }}">Register</a></li>
                     </ul>
                 </li>
             </ul>
