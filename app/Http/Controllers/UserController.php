@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\LoginUserEvent;
+use App\Events\RegisterUserEvent;
+use App\Events\UserDetailsEvent;
 use App\Http\Requests\UserLoginRequest;
 use App\Http\Requests\UserRegisterRequest;
 use App\Models\Country;
@@ -44,6 +47,8 @@ class UserController extends Controller
             ])->withInput($request->all());
         }
 
+        event(new RegisterUserEvent($user));
+
         return redirect()->back()->with([
             'type' => 'success',
             'title' => 'Success !',
@@ -71,5 +76,16 @@ class UserController extends Controller
         auth()->logout();
 
         return redirect()->route('login');
+    }
+
+    public function user_details($id) {
+        if(!auth()->check()) {
+            return abort(403);
+        }
+
+        $user = User::with('language','country')->findOrFail($id);
+        $auth_user = User::findOrFail(auth()->id());
+
+        event(new UserDetailsEvent($auth_user, $user));
     }
 }
