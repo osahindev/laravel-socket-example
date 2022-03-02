@@ -13,6 +13,18 @@ use Illuminate\Support\Facades\Broadcast;
 |
 */
 
+Broadcast::channel('online_users', function ($user){
+    return ['id' => $user->id, 'name' => $user->name];
+});
+
+Broadcast::channel('user_details.{id}', function ($user, $id){
+    return (int) $user->id === (int) $id;
+});
+
+Broadcast::channel('user_register', function ($user){
+    return true;
+});
+
 Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });
