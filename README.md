@@ -1,7 +1,6 @@
 # Laravel Socket Example
 
-...
-
+Laravel events and socket connection examples.
 
 ## Install with docker
 
@@ -30,8 +29,10 @@ DB_PASSWORD=password
 
 5. Build docker image.
 
-<blockquote>./vendor/bin/sail build --no-cache</blockquote>
+```./vendor/bin/sail build --no-cache```
 
 6. Start the project.
 
 <blockquote>./vendor/bin/sail up</blockquote>
+
+7. Open the localhost and ta taa.
